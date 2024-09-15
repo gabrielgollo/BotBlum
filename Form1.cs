@@ -14,6 +14,7 @@ namespace BotBlum
     {
         public BotLogic botLogic;
         public Logger logger;
+        public ConfigManager configManager;
         public Form1()
         {
             InitializeComponent();
@@ -70,6 +71,35 @@ namespace BotBlum
             buttonStopBot.Enabled = false;
 
             botLogic.Stop();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            configManager = new ConfigManager();
+
+            logger.Info(configManager.BotConfig.BearerToken);
+            logger.Info(configManager.BotConfig.MinPoint.ToString());
+            logger.Info(configManager.BotConfig.MaxPoint.ToString());
+
+            bearerTokenTextBox.Text = configManager.BotConfig.BearerToken;
+            minPointNumeric.Value = configManager.BotConfig.MinPoint;
+            maxPointNumeric.Value = configManager.BotConfig.MaxPoint;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(configManager == null)
+            {
+                logger.Error("Falha ao salvar configurações, configManager não foi inicializado."); return;
+            }
+
+            logger.Info("Salvando configurações...");
+
+            configManager.BotConfig.BearerToken = bearerTokenTextBox.Text;
+            configManager.BotConfig.MinPoint = (int)minPointNumeric.Value;
+            configManager.BotConfig.MaxPoint = (int)maxPointNumeric.Value;
+
+            configManager.SaveConfig();
         }
     }
 }
