@@ -17,11 +17,8 @@ namespace BotBlum
         private int minPoint = 40;
         private int maxPoint = 150;
 
-        public BotLogic(string bearerToken, Logger lg, int minP, int maxP)
+        public BotLogic(Logger lg, int minP, int maxP)
         {
-            setToken(bearerToken);
-
-
             this.logger = lg;
             this.minPoint = minP;
             this.maxPoint = maxP;
@@ -33,7 +30,6 @@ namespace BotBlum
             httpClient.DefaultRequestHeaders.Add("Origin", "https://telegram.blum.codes");
             httpClient.DefaultRequestHeaders.Add("sec-ch-ua", "\"Not/A)Brand\";v=\"8\", \"Chromium\";v=\"126\", \"Microsoft Edge\";v=\"126\", \"Microsoft Edge WebView2\";v=\"126\"");
             httpClient.DefaultRequestHeaders.Add("sec-ch-ua-platform", "\"Windows\"");
-            setToken(token);
         }
         public void setToken(string bearerToken)
         {
@@ -51,6 +47,46 @@ namespace BotBlum
             httpClient.DefaultRequestHeaders.Remove("Authorization");
             httpClient.DefaultRequestHeaders.Add("Authorization", bearerToken);
         }
+
+        public async Task<string> LoginUsingQueryId(string queryId)
+        {
+            try
+            {
+                var body = new
+                {
+                    query = queryId
+                };
+                var contentBody = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
+
+                var response = await httpClient.PostAsync("https://user-domain.blum.codes/api/v1/auth/provider/PROVIDER_TELEGRAM_MINI_APP", contentBody);
+                var content = await response.Content.ReadAsStringAsync();
+                var data = JsonSerializer.Deserialize<JsonElement>(content);
+
+                // will access property token.access
+                if (data.TryGetProperty("token", out var tokenElement) &&
+                    tokenElement.TryGetProperty("access", out var accessTokenElement))
+                {
+                    string accessToken = accessTokenElement.GetString();
+                    
+                    setToken(accessToken);
+
+                    return accessToken;
+                }
+
+                throw new Exception("Failed to get access token using queryId");
+            }
+            catch (TaskCanceledException ex) when (ex.CancellationToken == CancellationToken.None)
+            {
+                // Isso confirma que foi um timeout e não um cancelamento manual
+                logger.Error("Request was canceled due to timeout.");
+                throw new Exception("The request timed out.");
+            }
+            catch (Exception ex) {
+                logger.Error("Failed to get access token using queryId");
+                throw new Exception("Failed to get access token using queryId");
+            }
+        }
+
         public async Task<Boolean> CheckToken()
         {
             try
@@ -185,7 +221,7 @@ namespace BotBlum
             {
                 logger.Info("Executing bot in 3s");
                 await Sleep(3000);
-                isRunning = true;
+                if(stop){ return; }
                 var userBalance = await GetUserBalance();
                 int playPasses = userBalance.GetProperty("playPasses").GetInt32();
                 var availableBalance = userBalance.GetProperty("availableBalance").GetString();
@@ -208,7 +244,7 @@ namespace BotBlum
                 var newUserBalance = await GetUserBalance();
                 var newAvailableBalance = newUserBalance.GetProperty("availableBalance").GetString();
 
-                isRunning = false;
+                
 
                 Double claimedInt = (Double.Parse(newAvailableBalance) - Double.Parse(availableBalance));
                 string claimed = claimedInt.ToString();
@@ -239,14 +275,30 @@ namespace BotBlum
             return true;
         }
 
+        public async Task<Boolean> AsyncStop()
+        {
+            logger.Warn("Stopping bot...");
+            stop = true;
+
+            while (isRunning)
+            {
+                await Task.Delay(100);
+            }
+
+            return true;
+        }
+
         public async Task<Boolean> StartMainLoop()
         {
             logger.Info("Bot started");
+
             while (!stop)
             {
+                isRunning = true;
                 await ExecuteBot();
             }
 
+            isRunning = false;
             stop = false;
             logger.Info("Bot stopped.");
             return true;

@@ -361,3 +361,13 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Microsoft.Bcl.AsyncInterfaces.8.0.0
+/NuGet.CommandLine.6.11.0
+/System.Buffers.4.5.1
+/System.Memory.4.5.5
+/System.Numerics.Vectors.4.5.0
+/System.Runtime.CompilerServices.Unsafe.6.0.0
+/System.Text.Encodings.Web.8.0.0
+/System.Text.Json.8.0.4
+/System.Threading.Tasks.Extensions.4.5.4
+/System.ValueTuple.4.5.0

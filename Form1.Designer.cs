@@ -45,16 +45,20 @@
             this.maxPointLabel = new System.Windows.Forms.Label();
             this.maxPointNumeric = new System.Windows.Forms.NumericUpDown();
             this.buttonStopBot = new System.Windows.Forms.Button();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.queryIdTextBox = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minPointNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxPointNumeric)).BeginInit();
+            this.flowLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonStartBot
             // 
-            this.buttonStartBot.Location = new System.Drawing.Point(379, 143);
+            this.buttonStartBot.Location = new System.Drawing.Point(379, 207);
             this.buttonStartBot.Name = "buttonStartBot";
             this.buttonStartBot.Size = new System.Drawing.Size(79, 33);
             this.buttonStartBot.TabIndex = 0;
@@ -81,6 +85,7 @@
             // 
             // bearerTokenTextBox
             // 
+            this.bearerTokenTextBox.Enabled = false;
             this.bearerTokenTextBox.Location = new System.Drawing.Point(3, 16);
             this.bearerTokenTextBox.Name = "bearerTokenTextBox";
             this.bearerTokenTextBox.Size = new System.Drawing.Size(434, 20);
@@ -99,7 +104,7 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.BearerTokenLabel);
             this.flowLayoutPanel1.Controls.Add(this.bearerTokenTextBox);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 12);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 76);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(446, 47);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -109,7 +114,7 @@
             this.flowLayoutPanel2.Controls.Add(this.DebugTextBoxLabel);
             this.flowLayoutPanel2.Controls.Add(this.splitter2);
             this.flowLayoutPanel2.Controls.Add(this.DebugTextBox);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(12, 203);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(12, 242);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(446, 152);
             this.flowLayoutPanel2.TabIndex = 6;
@@ -132,7 +137,7 @@
             this.flowLayoutPanel3.Controls.Add(this.maxPointLabel);
             this.flowLayoutPanel3.Controls.Add(this.maxPointNumeric);
             this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(12, 78);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(12, 138);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(113, 98);
             this.flowLayoutPanel3.TabIndex = 7;
@@ -221,7 +226,7 @@
             // buttonStopBot
             // 
             this.buttonStopBot.Enabled = false;
-            this.buttonStopBot.Location = new System.Drawing.Point(294, 143);
+            this.buttonStopBot.Location = new System.Drawing.Point(294, 207);
             this.buttonStopBot.Name = "buttonStopBot";
             this.buttonStopBot.Size = new System.Drawing.Size(79, 33);
             this.buttonStopBot.TabIndex = 8;
@@ -229,14 +234,40 @@
             this.buttonStopBot.UseVisualStyleBackColor = true;
             this.buttonStopBot.Click += new System.EventHandler(this.buttonStopBot_Click);
             // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.label2);
+            this.flowLayoutPanel4.Controls.Add(this.queryIdTextBox);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(12, 12);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(446, 47);
+            this.flowLayoutPanel4.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Query Id";
+            // 
+            // queryIdTextBox
+            // 
+            this.queryIdTextBox.Location = new System.Drawing.Point(3, 16);
+            this.queryIdTextBox.Name = "queryIdTextBox";
+            this.queryIdTextBox.Size = new System.Drawing.Size(434, 20);
+            this.queryIdTextBox.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(470, 367);
+            this.ClientSize = new System.Drawing.Size(470, 406);
             this.Controls.Add(this.buttonStopBot);
             this.Controls.Add(this.flowLayoutPanel3);
+            this.Controls.Add(this.flowLayoutPanel4);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.buttonStartBot);
             this.Controls.Add(this.flowLayoutPanel2);
@@ -259,6 +290,8 @@
             this.flowLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minPointNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxPointNumeric)).EndInit();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -281,6 +314,9 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Button buttonStopBot;
         private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox queryIdTextBox;
     }
 }
 

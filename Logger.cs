@@ -16,16 +16,22 @@ namespace BotBlum
         // Função auxiliar para escrever texto com a cor especificada
         private void WriteLog(string message, Color color)
         {
-            richTextBox.Invoke(new Action(() =>
+            // Verifica se a thread atual é a thread da UI
+            if (richTextBox.InvokeRequired)
             {
+                // Se não for, chama Invoke para fazer a atualização na thread da UI
+                richTextBox.Invoke(new Action(() => WriteLog(message, color)));
+            }
+            else
+            {
+                // Se for a thread correta, escreve diretamente no RichTextBox
                 richTextBox.SelectionStart = richTextBox.TextLength;
                 richTextBox.SelectionLength = 0;
 
                 richTextBox.SelectionColor = color;
-                richTextBox.AppendText($"{DateTime.Now}: {message}\n");
-                richTextBox.SelectionColor = richTextBox.ForeColor;
-                richTextBox.ScrollToCaret();
-            }));
+                richTextBox.AppendText($"{DateTime.Now}: {message}{Environment.NewLine}");
+                richTextBox.SelectionColor = richTextBox.ForeColor; // Volta para a cor padrão
+            }
         }
 
         public void Info(string message)

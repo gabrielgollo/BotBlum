@@ -59,6 +59,7 @@ namespace BotBlum
     // Classe que contém as configurações do bot
     public class BotConfig
     {
+        public string QueryId { get; set; } = "";
         public string BearerToken { get; set; } = "";
         public int MinPoint { get; set; } = 40;
         public int MaxPoint { get; set; } = 150;
