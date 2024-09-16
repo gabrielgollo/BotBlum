@@ -84,7 +84,7 @@ namespace BotBlum
             }
             catch (Exception ex) {
                 logger.Error("Failed to get access token using queryId");
-                throw new Exception("Failed to get access token using queryId");
+                throw new Exception("Failed to get access token using queryId" + ex.Message);
             }
         }
 
@@ -115,7 +115,7 @@ namespace BotBlum
             }
 
             catch (Exception ex) {
-                logger.Warn("The current token is invalid.");
+                logger.Warn("The current token is invalid." + ex.Message);
                 return false;
             }
         }
@@ -252,6 +252,7 @@ namespace BotBlum
 
                 logger.Info($"Game reward claimed for {gameId} - free tickets: {playPasses} - balance: {newAvailableBalance} - claimed -> {claimed} - triedToClaim -> {points}");
 
+                if (stop) { return; }
                 logger.Warn("Waiting 5s");
                 await Sleep(5000);
             }
