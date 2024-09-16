@@ -28,7 +28,7 @@ namespace BotBlum
             {
                string queryId = queryIdTextBox.Text;
                 if (string.IsNullOrEmpty(queryId)) {
-                    throw new Exception("O campo Query ID não pode ser vazio.");
+                    throw new Exception("The field  Query ID cannot be null or empty.");
                 }
 
                 buttonStartBot.Enabled = false;
@@ -50,14 +50,14 @@ namespace BotBlum
 
 
                 if (!isValid) {
-                    logger.Warn("Tentando gerar outro token com queryId...");
+                    logger.Warn("Trying to get another token with queryId...");
                     try
                     {
                         string newToken = await botLogic.LoginUsingQueryId(queryId);
                         bearerTokenTextBox.Text = newToken;
                     } catch (Exception ex) {
-                        logger.Error("Falha ao gerar token com queryId: " + ex.Message);
-                        logger.Warn("Tentando gerar outro token com renovação de token...");
+                        logger.Error("Failed to get token with queryId: " + ex.Message);
+                        logger.Warn("Trying to get another token by refreshing token...");
                         try
                         {
                             string newToken2 = await botLogic.RefreshToken();
@@ -66,7 +66,7 @@ namespace BotBlum
                         }
                         catch (Exception ex2)
                         {
-                            throw new Exception("Falha ao gerar outro token, pegue manualmente." + ex2.Message);
+                            throw new Exception("Failed to get token, you'll need to get the query_id string in telegram web." + ex2.Message);
                         }
                     }
                 }
@@ -78,7 +78,7 @@ namespace BotBlum
             }
             catch (Exception ex) {
                 logger.Error(ex.Message);
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Bot Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 buttonStartBot.Enabled = true;
             }
         }
@@ -93,14 +93,14 @@ namespace BotBlum
         private void Form1_Load(object sender, EventArgs e)
         {
             configManager = new ConfigManager();
-            logger.Info("Carregando configurações...");
+            logger.Info("Loading configs...");
 
             queryIdTextBox.Text = configManager.BotConfig.QueryId;
             bearerTokenTextBox.Text = configManager.BotConfig.BearerToken;
             minPointNumeric.Value = configManager.BotConfig.MinPoint;
             maxPointNumeric.Value = configManager.BotConfig.MaxPoint;
 
-            logger.Info("Configurações carregadas.");
+            logger.Info("Configs loaded.");
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -108,7 +108,7 @@ namespace BotBlum
             if (botLogic != null && botLogic.isRunning)
             {
                 // Exibir uma mensagem e cancelar o fechamento
-                MessageBox.Show("O bot está rodando. Pare o bot antes de fechar.", "Bot em execução", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("The bot is running. Stop the bot and wait it finish before closing.", "The bot is running", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 // Cancelar o fechamento
                 e.Cancel = true;
@@ -117,10 +117,10 @@ namespace BotBlum
 
             if (configManager == null)
             {
-                logger.Error("Falha ao salvar configurações, configManager não foi inicializado."); return;
+                logger.Error("Failed to save configs, configManager was not instantiated."); return;
             }
 
-            logger.Info("Salvando configurações...");
+            logger.Info("Saving Configs...");
 
             configManager.BotConfig.QueryId = queryIdTextBox.Text;
             configManager.BotConfig.BearerToken = bearerTokenTextBox.Text;
@@ -129,7 +129,17 @@ namespace BotBlum
 
             configManager.SaveConfig();
 
-            logger.Info("Configurações salvas.");
+            logger.Info("Configs saved.");
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            queryIdTextBox.UseSystemPasswordChar = !checkBox2.Checked;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            bearerTokenTextBox.UseSystemPasswordChar = !checkBox1.Checked;
         }
     }
 }

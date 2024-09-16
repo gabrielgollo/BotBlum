@@ -48,12 +48,18 @@
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.queryIdTextBox = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minPointNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxPointNumeric)).BeginInit();
             this.flowLayoutPanel4.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
+            this.flowLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonStartBot
@@ -86,10 +92,11 @@
             // bearerTokenTextBox
             // 
             this.bearerTokenTextBox.Enabled = false;
-            this.bearerTokenTextBox.Location = new System.Drawing.Point(3, 16);
+            this.bearerTokenTextBox.Location = new System.Drawing.Point(3, 3);
             this.bearerTokenTextBox.Name = "bearerTokenTextBox";
-            this.bearerTokenTextBox.Size = new System.Drawing.Size(434, 20);
+            this.bearerTokenTextBox.Size = new System.Drawing.Size(355, 20);
             this.bearerTokenTextBox.TabIndex = 2;
+            this.bearerTokenTextBox.UseSystemPasswordChar = true;
             // 
             // BearerTokenLabel
             // 
@@ -103,7 +110,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.BearerTokenLabel);
-            this.flowLayoutPanel1.Controls.Add(this.bearerTokenTextBox);
+            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel5);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 76);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(446, 47);
@@ -237,7 +244,7 @@
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.Controls.Add(this.label2);
-            this.flowLayoutPanel4.Controls.Add(this.queryIdTextBox);
+            this.flowLayoutPanel4.Controls.Add(this.flowLayoutPanel6);
             this.flowLayoutPanel4.Location = new System.Drawing.Point(12, 12);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(446, 47);
@@ -254,10 +261,52 @@
             // 
             // queryIdTextBox
             // 
-            this.queryIdTextBox.Location = new System.Drawing.Point(3, 16);
+            this.queryIdTextBox.Location = new System.Drawing.Point(3, 3);
             this.queryIdTextBox.Name = "queryIdTextBox";
-            this.queryIdTextBox.Size = new System.Drawing.Size(434, 20);
+            this.queryIdTextBox.Size = new System.Drawing.Size(355, 20);
             this.queryIdTextBox.TabIndex = 2;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(364, 3);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(53, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Show";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.Controls.Add(this.bearerTokenTextBox);
+            this.flowLayoutPanel5.Controls.Add(this.checkBox1);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(443, 27);
+            this.flowLayoutPanel5.TabIndex = 5;
+            // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.Controls.Add(this.queryIdTextBox);
+            this.flowLayoutPanel6.Controls.Add(this.checkBox2);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(443, 31);
+            this.flowLayoutPanel6.TabIndex = 4;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Location = new System.Drawing.Point(364, 3);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(53, 17);
+            this.checkBox2.TabIndex = 5;
+            this.checkBox2.Text = "Show";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // Form1
             // 
@@ -279,7 +328,7 @@
             this.Opacity = 0.98D;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Blum Bot";
+            this.Text = "Blum Bot - by GabrielGollo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -292,6 +341,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.maxPointNumeric)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel4.PerformLayout();
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel5.PerformLayout();
+            this.flowLayoutPanel6.ResumeLayout(false);
+            this.flowLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -317,6 +370,10 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox queryIdTextBox;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }
 

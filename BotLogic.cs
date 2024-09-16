@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -9,7 +10,7 @@ namespace BotBlum
 {
     public class BotLogic
     {
-        private string token = "Bearer token";
+        private string token = "";
         private HttpClient httpClient = new HttpClient();
         public Logger logger = null;
         public Boolean isRunning = false;
@@ -35,7 +36,7 @@ namespace BotBlum
         {
             if (String.IsNullOrEmpty(bearerToken))
             {
-                throw new Exception("O Bearer Token não pode ser nulo ou vázio");
+                throw new Exception("Bearer Token cannot be null or empty");
             }
 
             bearerToken = bearerToken.Trim();
@@ -114,7 +115,7 @@ namespace BotBlum
             }
 
             catch (Exception ex) {
-                logger.Warn("O token atual não é válido");
+                logger.Warn("The current token is invalid.");
                 return false;
             }
         }
@@ -157,7 +158,7 @@ namespace BotBlum
 
         public async Task<string> InitGameSession()
         {
-            logger.Info("Tentando iniciar um novo game");
+            logger.Info("Trying to init a new game...");
             var response = await httpClient.PostAsync("https://game-domain.blum.codes/api/v1/game/play", null);
             var content = await response.Content.ReadAsStringAsync();
 
@@ -173,7 +174,7 @@ namespace BotBlum
             }
             var gameIdRes = gameId.GetString();
             
-            logger.Info($"GameId '{gameIdRes}' iniciado");
+            logger.Info($"GameId '{gameIdRes}' started");
 
             return gameIdRes;
         }
@@ -194,7 +195,7 @@ namespace BotBlum
                 throw new Exception("Error starting game session: GAME_SESSION_ERROR");
             }
 
-            logger.Info($"GameId {gameId} recompensa de {points} pontos capturada!");
+            logger.Info($"GameId {gameId} reward of {points} points claimed!");
         }
 
         public async Task<JsonElement> GetUserBalance()
@@ -235,7 +236,7 @@ namespace BotBlum
                 }
 
                 var gameId = await InitGameSession();
-                logger.Info("Aguardando 33 segundos para capturar recompensa");
+                logger.Info("Waiting 33s to claim reward");
                 await Sleep(33000); // wait 33 seconds before claiming
                 var points = GeneratePoints();
                 await ClaimGameReward(gameId, points);
@@ -246,10 +247,10 @@ namespace BotBlum
 
                 
 
-                Double claimedInt = (Double.Parse(newAvailableBalance) - Double.Parse(availableBalance));
-                string claimed = claimedInt.ToString();
+                Double claimedNumber = (Double.Parse(newAvailableBalance, CultureInfo.InvariantCulture) - Double.Parse(availableBalance, CultureInfo.InvariantCulture));
+                string claimed = claimedNumber.ToString();
 
-                logger.Info($"Game reward claimed - {gameId} - free tickets: {playPasses} - balance: {newAvailableBalance} - claimed -> {claimed} - tried -> {points}");
+                logger.Info($"Game reward claimed for {gameId} - free tickets: {playPasses} - balance: {newAvailableBalance} - claimed -> {claimed} - triedToClaim -> {points}");
 
                 logger.Warn("Waiting 5s");
                 await Sleep(5000);
