@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BotBlum.Properties;
+using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
 
 namespace BotBlum
@@ -9,6 +10,7 @@ namespace BotBlum
     internal class WebTelegramForm: Form
     {
         Logger logger;
+        private WebView2 webView21;
         WebView2 webView;
         public WebTelegramForm(Logger logger)
         {
@@ -19,18 +21,43 @@ namespace BotBlum
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.StartPosition = FormStartPosition.WindowsDefaultBounds;
 
-            InitializeWebView();
+            InitializeComponent();
         }
-        private async void InitializeWebView()
+        private void InitializeComponent()
         {
-            webView = new WebView2();
-            webView.Dock = DockStyle.Fill;
-            this.Controls.Add(webView);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebTelegramForm));
+            this.webView = new Microsoft.Web.WebView2.WinForms.WebView2();
+            ((System.ComponentModel.ISupportInitialize)(this.webView)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // webView
+            // 
+            this.webView.AllowExternalDrop = true;
+            this.webView.CreationProperties = null;
+            this.webView.DefaultBackgroundColor = System.Drawing.Color.White;
+            this.webView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webView.Location = new System.Drawing.Point(0, 0);
+            this.webView.Name = "webView";
+            this.webView.Size = new System.Drawing.Size(284, 261);
+            this.webView.TabIndex = 0;
+            this.webView.ZoomFactor = 1D;
+            // 
+            // WebTelegramForm
+            // 
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.webView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "WebTelegramForm";
+            this.Opacity = 0.9D;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
+            this.Text = "Web.Telegram";
+            ((System.ComponentModel.ISupportInitialize)(this.webView)).EndInit();
+            this.ResumeLayout(false);
 
-            // Inicializa o WebView2
-            await webView.EnsureCoreWebView2Async(null);
-
-            
         }
 
         public async Task<string> GetQueryId()
@@ -118,6 +145,11 @@ namespace BotBlum
                     }
                 }
 
+                return null;
+            }
+            catch (InvalidOperationException ex)
+            {
+                logger.Warn("O WebApp foi fechado inesperadamente: "+ex.Message);
                 return null;
             }
             catch (Exception ex) { 
