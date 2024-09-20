@@ -113,7 +113,7 @@ namespace BotBlum
 
                         // Captura a URL do WebApp
                         string iframeUrl = await webView.ExecuteScriptAsync("document.querySelectorAll('iframe')[0].src;");
-                        logger.Info($"WebApp URL: {iframeUrl}");
+                        logger.Info($"WebApp URL: {iframeUrl.Substring(0, 10)}");
                         if (!iframeUrl.Contains("https://telegram.blum.codes"))
                         {
                             MessageBox.Show("Error while getting WebApp URL", "Web Telegram Automation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

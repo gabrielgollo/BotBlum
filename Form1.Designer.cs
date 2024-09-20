@@ -65,7 +65,8 @@
             // 
             // buttonStartBot
             // 
-            this.buttonStartBot.Location = new System.Drawing.Point(379, 207);
+            this.buttonStartBot.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.buttonStartBot.Location = new System.Drawing.Point(379, 231);
             this.buttonStartBot.Name = "buttonStartBot";
             this.buttonStartBot.Size = new System.Drawing.Size(79, 33);
             this.buttonStartBot.TabIndex = 0;
@@ -112,7 +113,7 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.BearerTokenLabel);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel5);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 76);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 113);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(446, 47);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -142,7 +143,7 @@
             this.flowLayoutPanel2.Controls.Add(this.DebugTextBoxLabel);
             this.flowLayoutPanel2.Controls.Add(this.splitter2);
             this.flowLayoutPanel2.Controls.Add(this.DebugTextBox);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(12, 242);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(12, 270);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(446, 152);
             this.flowLayoutPanel2.TabIndex = 6;
@@ -165,7 +166,7 @@
             this.flowLayoutPanel3.Controls.Add(this.maxPointLabel);
             this.flowLayoutPanel3.Controls.Add(this.maxPointNumeric);
             this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(12, 138);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(12, 166);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(113, 98);
             this.flowLayoutPanel3.TabIndex = 7;
@@ -253,20 +254,25 @@
             // 
             // buttonStopBot
             // 
+            this.buttonStopBot.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonStopBot.Enabled = false;
-            this.buttonStopBot.Location = new System.Drawing.Point(294, 207);
+            this.buttonStopBot.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.buttonStopBot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStopBot.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonStopBot.Location = new System.Drawing.Point(294, 231);
+            this.buttonStopBot.Margin = new System.Windows.Forms.Padding(0);
             this.buttonStopBot.Name = "buttonStopBot";
             this.buttonStopBot.Size = new System.Drawing.Size(79, 33);
             this.buttonStopBot.TabIndex = 8;
             this.buttonStopBot.Text = "Stop Bot";
-            this.buttonStopBot.UseVisualStyleBackColor = true;
+            this.buttonStopBot.UseVisualStyleBackColor = false;
             this.buttonStopBot.Click += new System.EventHandler(this.buttonStopBot_Click);
             // 
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.Controls.Add(this.label2);
             this.flowLayoutPanel4.Controls.Add(this.flowLayoutPanel6);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(12, 12);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(12, 60);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(446, 47);
             this.flowLayoutPanel4.TabIndex = 4;
@@ -311,11 +317,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(379, 140);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button1.Location = new System.Drawing.Point(12, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(79, 33);
+            this.button1.Size = new System.Drawing.Size(446, 33);
             this.button1.TabIndex = 9;
-            this.button1.Text = "Get QueryId";
+            this.button1.Text = "Login Telegram";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -324,7 +332,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(470, 406);
+            this.ClientSize = new System.Drawing.Size(470, 434);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonStopBot);
             this.Controls.Add(this.flowLayoutPanel3);
