@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace BotBlum
 {
+    public class RangePoint
+    {
+        public int minPoint;
+        public int maxPoint;
+    }
+
     public class BotLogic
     {
         private string token = "";
@@ -18,11 +24,11 @@ namespace BotBlum
         private int minPoint = 40;
         private int maxPoint = 150;
 
-        public BotLogic(Logger lg, int minP, int maxP)
+        public BotLogic(Logger lg, RangePoint rangePoint)
         {
             this.logger = lg;
-            this.minPoint = minP;
-            this.maxPoint = maxP;
+            this.maxPoint = rangePoint.maxPoint;
+            this.minPoint = rangePoint.minPoint;
 
             // set timeout of 6 seconds
             httpClient.Timeout = TimeSpan.FromSeconds(3);
@@ -32,7 +38,14 @@ namespace BotBlum
             httpClient.DefaultRequestHeaders.Add("sec-ch-ua", "\"Not/A)Brand\";v=\"8\", \"Chromium\";v=\"126\", \"Microsoft Edge\";v=\"126\", \"Microsoft Edge WebView2\";v=\"126\"");
             httpClient.DefaultRequestHeaders.Add("sec-ch-ua-platform", "\"Windows\"");
         }
-        public void setToken(string bearerToken)
+
+        public void SetPoint(RangePoint rangePoint)
+        {
+            this.maxPoint=rangePoint.maxPoint;
+            this.minPoint=rangePoint.minPoint;
+        }
+
+        public void SetToken(string bearerToken)
         {
             if (String.IsNullOrEmpty(bearerToken))
             {
@@ -69,7 +82,7 @@ namespace BotBlum
                 {
                     string accessToken = accessTokenElement.GetString();
                     
-                    setToken(accessToken);
+                    SetToken(accessToken);
 
                     return accessToken;
                 }
@@ -144,7 +157,7 @@ namespace BotBlum
 
                 string newToken = responseToken.GetString();
                 
-                setToken(newToken);
+                SetToken(newToken);
 
                 return newToken;
             }

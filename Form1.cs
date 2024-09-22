@@ -33,19 +33,21 @@ namespace BotBlum
                 }
 
                 buttonStartBot.Enabled = false;
-                int min = (int)minPointNumeric.Value;
-                int max = (int)maxPointNumeric.Value;
                 string token = bearerTokenTextBox.Text;
 
+                RangePoint rangePoint = new RangePoint { minPoint = (int)minPointNumeric.Value, maxPoint = (int)maxPointNumeric.Value };
                 if (botLogic == null)
                 {
-                    botLogic = new BotLogic(logger, min, max);
+                    botLogic = new BotLogic(logger, rangePoint);
+                } else
+                {
+                    botLogic.SetPoint(rangePoint);
                 }
 
                 Boolean isValid = false;
                 if (!String.IsNullOrEmpty(token))
                 {
-                    botLogic.setToken(token);
+                    botLogic.SetToken(token);
                     isValid = await botLogic.CheckToken();
                 }
 
@@ -72,10 +74,13 @@ namespace BotBlum
                     }
                 }
 
+                buttonClearTelegramCache.Enabled = false;
                 buttonStopBot.Enabled = true;
-                
+                buttonLoginTelegram.Enabled = false;
                 await Task.Run(() => botLogic.StartMainLoop());
+                buttonClearTelegramCache.Enabled = true;
                 buttonStartBot.Enabled = true;
+                buttonLoginTelegram.Enabled=true;
             }
             catch (Exception ex) {
                 logger.Error(ex.Message);
@@ -143,18 +148,58 @@ namespace BotBlum
             bearerTokenTextBox.UseSystemPasswordChar = !checkBox1.Checked;
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private async void buttonLoginTelegram_Click(object sender, EventArgs e)
         {
+            buttonClearTelegramCache.Enabled = false;
+            buttonLoginTelegram.Enabled = false;
+            buttonStartBot.Enabled = false;
+            buttonStopBot.Enabled = false;
+
             WebTelegramForm webTelegramForm = new WebTelegramForm(logger);
             webTelegramForm.Show();
 
-            string queryId = await webTelegramForm.GetQueryId();
-            if(!string.IsNullOrEmpty(queryId))
+            try
             {
-                queryIdTextBox.Text = queryId.Trim().Trim('"');
+                string queryId = await webTelegramForm.GetQueryId();
+                if(!string.IsNullOrEmpty(queryId))
+                {
+                    queryIdTextBox.Text = queryId.Trim().Trim('"');
+                }
+
+                webTelegramForm.Close();
+            }
+            catch (Exception ex) {
+                logger.Error("Ocorred an error while getting the Query Id while automating telegram" + ex.Message);
+                MessageBox.Show("Ocorred an error while getting the Query Id while automating telegram", "Web Telegram Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            webTelegramForm.Close();
+            buttonClearTelegramCache.Enabled = true;
+            buttonLoginTelegram.Enabled = true;
+            buttonStartBot.Enabled = true;
+            buttonStopBot.Enabled = true;
+        }
+
+        private async void buttonClearTelegramCache_Click(object sender, EventArgs e)
+        {
+            buttonClearTelegramCache.Enabled = false;
+            buttonLoginTelegram.Enabled= false;
+            buttonStopBot.Enabled= false;
+            buttonStartBot.Enabled= false;
+
+            try
+            {
+                WebTelegramForm webTelegramForm = new WebTelegramForm(logger);
+                webTelegramForm.Show();
+                await webTelegramForm.ClearCache();
+            }
+            catch (Exception ex) {
+                logger.Info(ex.Message);
+            }
+
+            buttonClearTelegramCache.Enabled = true;
+            buttonLoginTelegram.Enabled = true;
+            buttonStopBot.Enabled = true;
+            buttonStartBot.Enabled = true;
         }
     }
 }

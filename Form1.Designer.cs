@@ -52,7 +52,8 @@
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.queryIdTextBox = new System.Windows.Forms.TextBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonLoginTelegram = new System.Windows.Forms.Button();
+            this.buttonClearTelegramCache = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -66,6 +67,7 @@
             // buttonStartBot
             // 
             this.buttonStartBot.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.buttonStartBot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStartBot.Location = new System.Drawing.Point(379, 231);
             this.buttonStartBot.Name = "buttonStartBot";
             this.buttonStartBot.Size = new System.Drawing.Size(79, 33);
@@ -315,17 +317,29 @@
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // button1
+            // buttonLoginTelegram
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(446, 33);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Login Telegram";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonLoginTelegram.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLoginTelegram.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.buttonLoginTelegram.Location = new System.Drawing.Point(12, 12);
+            this.buttonLoginTelegram.Name = "buttonLoginTelegram";
+            this.buttonLoginTelegram.Size = new System.Drawing.Size(446, 33);
+            this.buttonLoginTelegram.TabIndex = 9;
+            this.buttonLoginTelegram.Text = "Login Telegram";
+            this.buttonLoginTelegram.UseVisualStyleBackColor = true;
+            this.buttonLoginTelegram.Click += new System.EventHandler(this.buttonLoginTelegram_Click);
+            // 
+            // buttonClearTelegramCache
+            // 
+            this.buttonClearTelegramCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonClearTelegramCache.ForeColor = System.Drawing.Color.Red;
+            this.buttonClearTelegramCache.Location = new System.Drawing.Point(131, 231);
+            this.buttonClearTelegramCache.Name = "buttonClearTelegramCache";
+            this.buttonClearTelegramCache.Size = new System.Drawing.Size(125, 32);
+            this.buttonClearTelegramCache.TabIndex = 10;
+            this.buttonClearTelegramCache.Text = "Clear Telegram";
+            this.buttonClearTelegramCache.UseVisualStyleBackColor = true;
+            this.buttonClearTelegramCache.Click += new System.EventHandler(this.buttonClearTelegramCache_Click);
             // 
             // Form1
             // 
@@ -333,7 +347,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(470, 434);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonClearTelegramCache);
+            this.Controls.Add(this.buttonLoginTelegram);
             this.Controls.Add(this.buttonStopBot);
             this.Controls.Add(this.flowLayoutPanel3);
             this.Controls.Add(this.flowLayoutPanel4);
@@ -394,7 +409,8 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonLoginTelegram;
+        private System.Windows.Forms.Button buttonClearTelegramCache;
     }
 }
 

@@ -10,8 +10,7 @@ namespace BotBlum
     internal class WebTelegramForm: Form
     {
         Logger logger;
-        private WebView2 webView21;
-        WebView2 webView;
+        private WebView2 webView;
         public WebTelegramForm(Logger logger)
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebTelegramForm));
@@ -22,6 +21,21 @@ namespace BotBlum
             this.StartPosition = FormStartPosition.WindowsDefaultBounds;
 
             InitializeComponent();
+        }
+
+        public async Task<Boolean> ClearCache()
+        {
+            try
+            {
+                while (webView == null) { }
+                await webView.CoreWebView2.Profile.ClearBrowsingDataAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return false;
+            }
         }
         private void InitializeComponent()
         {
@@ -64,6 +78,7 @@ namespace BotBlum
         {
             try
             {
+                while (webView == null) { }
                 // Navega para o Telegram Web
                 webView.Source = new Uri("https://web.telegram.org");
                 while (true)
