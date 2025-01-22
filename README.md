@@ -3,8 +3,8 @@
 BotBlum é um bot desenvolvido em C# com Windows Forms para jogar o jogo Blum. O projeto utiliza o WebView2 para facilitar ao usuário a obtenção do bearer token diretamente no Telegram.
 
 <div align="center">
-	<img align="center" alt="IMAGE GUI" src="https://github.com/gabrielgollo/BotBlum/blob/main/static/GUI.png">
-	<img align="center" alt="IMAGE GUI" src="https://github.com/gabrielgollo/BotBlum/blob/main/static/GUI-example.png">
+	<img align="center" alt="IMAGE GUI" src="https://github.com/gabrielgollo/BotBlum/blob/master/static/GUI.png">
+	<img align="center" alt="IMAGE GUI" src="https://github.com/gabrielgollo/BotBlum/blob/master/static/GUI-example.png">
 </div>
 
 ## Funcionalidades
