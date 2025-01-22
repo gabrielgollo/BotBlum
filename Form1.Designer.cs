@@ -303,12 +303,11 @@
             this.queryIdTextBox.Name = "queryIdTextBox";
             this.queryIdTextBox.Size = new System.Drawing.Size(355, 20);
             this.queryIdTextBox.TabIndex = 2;
+            this.queryIdTextBox.UseSystemPasswordChar = true;
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox2.Location = new System.Drawing.Point(364, 3);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(53, 17);
