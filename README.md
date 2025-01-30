@@ -23,7 +23,7 @@ BotBlum é um bot desenvolvido em C# com Windows Forms para jogar o jogo Blum. O 
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/BotBlum.git
+   git clone https://github.com/gabrielgollo/BotBlum.git
    ```
 2. Abra o projeto em uma IDE compatível com C# (como Visual Studio).
 3. Compile e execute o projeto.
